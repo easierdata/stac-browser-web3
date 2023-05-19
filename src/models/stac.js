@@ -226,6 +226,9 @@ class STAC {
       for (let key in this.assets) {
         let asset = this.assets[key];
         if (Utils.isObject(asset) && typeof asset.href === 'string' && Array.isArray(asset.roles) && asset.roles.find(role => roles.includes(role))) {
+          if (asset.alternate.IPFS) {
+            asset.href = `https://ipfs.io/ipfs/${asset.alternate.IPFS?.href.split("//")[1]}`;
+          }
           matches.push(asset);
         }
       }
